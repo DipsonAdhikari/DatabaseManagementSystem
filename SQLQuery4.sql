@@ -1,5 +1,6 @@
 --CREATE DATABASE LAB4;
 USE LAB4;
+--this is both lab 4 and lab 5 since we have updated it in the lab 5
 --DQL With complex queries
 DROP TABLE issuebt;
 DROP TABLE issuebs;
