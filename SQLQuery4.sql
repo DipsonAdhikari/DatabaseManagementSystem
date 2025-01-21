@@ -59,12 +59,12 @@ INSERT INTO book VALUES (107, 'Science ', 'Dpub','Casey', 200.00);
 INSERT INTO book VALUES (108, 'Social', 'Epub','Donald', 300.00);
 INSERT INTO book VALUES (109, 'GK', 'Fpub','Emerald', 400.00);
 INSERT INTO book VALUES (110, 'Nepali','Gpub', 'Franklin', 500.00);
-
 INSERT INTO book VALUES (111, 'NewBook','Gpub', 'Franklin', 500.00);
 INSERT INTO book VALUES (112, 'NoBook','Gpub', 'Franklin', 500.00);
 INSERT INTO book VALUES (113, 'NewNepali','Epub', 'Franklin', 500.00);
 INSERT INTO book VALUES (114, 'Grammar','Epub', 'Franklin', 500.00);
 INSERT INTO book VALUES (115, 'ARTIFICIALINTELLIGENCE','Apub', 'Sujan', 500.00);
+
 INSERT INTO student VALUES  (1, 'Dipson','Adhikari', 'BCT', 'Kageshowri Manohara'),
 							(2, 'Bipana','Ranabhat', 'BCE','Kathmandu'),
 							(3, 'Dikshya', 'Shrestha','BCT', 'Kathmandu'),
@@ -117,6 +117,7 @@ INSERT INTO issuebt VALUES (102,1,'2024-05-01'),
 							(112,5,'2024-02-21'),
 							(113,9,'2024-01-31'),
 							(114,2,'2024-03-14');
+
 --cross product
 SELECT *FROM book,issuebs;
 --detail of student who has issued book
@@ -131,9 +132,10 @@ SELECT *FROM student s
 SELECT *FROM student s
 		JOIN issuebs i ON s.sid=i.sid
 		WHERE sfname='Aashutosh';
---book nalani ko xa??
+--student who hasnt taken book
 SELECT *FROM student s
 LEFT OUTER JOIN issuebs i ON s.sid=i.sid;
+		--WHERE i.sid IS NULL;
 --RIGHT AND FULL ALSO
 SELECT *FROM student s
 RIGHT OUTER JOIN issuebs i ON s.sid=i.sid;
@@ -156,12 +158,12 @@ SELECT * FROM teacher t
 SELECT bname,sfname,slname,dateofissue FROM issuebs ibs
 		JOIN book b ON b.bid=ibs.bid
 		JOIN student s ON ibs.sid=s.sid;
---display yo din ko 
+--display that day  
 SELECT bname,sfname,slname,dateofissue FROM issuebs ibs
 		JOIN book b ON b.bid=ibs.bid
 		JOIN student s ON ibs.sid=s.sid
 		WHERE dateofIssue='2024-06-01';
---display sab teacher ko naam and student ko naam
+--display all teacher name and student name
 SELECT sfname FROM student
 		UNION
 SELECT tfname FROM teacher;
@@ -171,9 +173,9 @@ SELECT sfname FROM student
 		INTERSECT
 SELECT tfname FROM teacher;
 --TEACHER BUT NOT STUDENT
-SELECT sfname FROM student
+SELECT tfname FROM teacher
 		EXCEPT
-SELECT tfname FROM teacher;
+SELECT sfname FROM student;
 --DISPLAY ALL THE TEACHER AND STUDENT NAME WHO HAS ISSUED BOOK ON THIS DATE 
 SELECT bname AS bookName,sfname AS personName FROM issuebs ibs
 		JOIN book b ON b.bid=ibs.bid
